@@ -7,11 +7,11 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.dreamk.newapp1"
+        applicationId 'com.dreamk.gd.new01'
         minSdk 24
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName "0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,6 +30,10 @@ android {
 
 dependencies {
 
+    implementation 'com.github.1079374315:GSLS_Tool:v1.4.5.2'
+    implementation 'io.github.litao0621:nifty-slider:1.4.6'
+    // Added effect for Sliders (Optional Features)
+    implementation 'io.github.litao0621:nifty-slider-effect:1.4.6'
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity

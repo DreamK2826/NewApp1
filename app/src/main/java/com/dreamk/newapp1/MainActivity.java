@@ -1,14 +1,21 @@
 package com.dreamk.newapp1;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.gsls.gt.GT;
 
 public class MainActivity extends AppCompatActivity {
     //模拟登录功能用到的用户名和密码
@@ -32,6 +39,92 @@ public class MainActivity extends AppCompatActivity {
         getViews();
         setListener();
 
+    }
+
+    /**
+     * 通过GT库申请String[]中的权限
+     */
+
+    private void GT_getPermission(boolean userFlag){
+
+
+        GT.AppAuthorityManagement.Permission.init(
+                this, new String[]{
+                        android.Manifest.permission.BLUETOOTH_SCAN,
+                        android.Manifest.permission.BLUETOOTH_CONNECT,
+                        android.Manifest.permission.BLUETOOTH,
+                        android.Manifest.permission.BLUETOOTH_ADMIN,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION,
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION
+                }).permissions(new GT.AppAuthorityManagement.Permission.OnPermissionListener() {
+            @Override
+            public void onExplainRequestReason(GT.AppAuthorityManagement.Permission.PermissionDescription onPDListener) {
+
+                new GT.GT_Dialog.GT_AlertDialog(MainActivity.this).dialogTwoButton(
+                        android.R.drawable.ic_input_add,
+                        "授予权限",
+                        "为了更好的让本应用程序服务您，\n" +
+                                "请授予以下权限：\n" +
+                                "1.蓝牙权限用于连接设备\n" +
+                                "2.定位权限用于扫描设备\n",
+                        false,
+                        "拒绝授权", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                GT.log("拒绝");
+                                onPDListener.setAcceptAdvice(false);//核心，设置拒绝授权
+                            }
+                        },
+                        "同意授权", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                GT.log("同意");
+                                onPDListener.setAcceptAdvice(true);//核心，设置同意授权
+                            }
+                        }
+                ).show();
+            }
+
+            @Override
+            public boolean onForwardToSettings() {
+                return true;
+            }
+
+            @Override
+            public void request(boolean allGranted, String[] grantedList, String[] deniedList, String message) {
+                GT.logt("allGranted:" + allGranted);
+                GT.log("message", message);
+                if (allGranted) {
+                    //全部授权
+                    GT.log("全部授权");
+                    Toast.makeText(MainActivity.this, "全部授权成功", Toast.LENGTH_SHORT).show();
+
+                    if(userFlag){
+                        //管理用户页面
+                        GotoA();
+                    } else {
+                        //普通用户页面
+                        GotoB();
+                    }
+
+                } else {
+                    //未全部授权
+                    GT.log("grantedList:" + grantedList.length);
+                    GT.log("deniedList:" + deniedList.length);
+                }
+            }
+        });
+    }
+
+    private void GotoB() {
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void GotoA() {
+        Intent intent = new Intent(this, AdminActivity.class);
+        startActivity(intent);
     }
 
     private void getViews() {
@@ -61,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
                     if (userName.equals(adminUserNames[i]) && password.equals(adminUserPasswords[i])) {
                         ToastUtil.showTop(this, "管理用户组： " + userName + " 正在登录...");
                         foundUser = true;
+                        GT_getPermission(true);
                         break;
                     }
                 }
@@ -70,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 0; j < userNames.length; j++) {
                         if (userName.equals(userNames[j]) && password.equals(userPasswords[j])) {
                             ToastUtil.showTop(this, "普通用户组： " + userName + "正在登录...");
+                            GT_getPermission(false);
                             break;
                         } else {
                             //遍历完普通用户组还没有正常登录
