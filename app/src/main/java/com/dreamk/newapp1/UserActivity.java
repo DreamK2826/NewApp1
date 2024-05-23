@@ -17,17 +17,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBluetoothAction{
 
+    private final static char[] digits = "0123456789ABCDEF".toCharArray();
     EditText et_uNumber1,et_uColor1,et_uMessage;
 
     Button btn_uSubmit1,btn_uCancel1,btn_uExit1;
@@ -77,9 +81,43 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
         });
         btn_uExit1.setOnClickListener(v -> finish());
     }
-
     private void submit_f1() {
+        String uNum,uColorStr,uMessage;
+        uNum = et_uNumber1.getText().toString();
+        uColorStr = et_uColor1.getText().toString();
+        uMessage = et_uMessage.getText().toString();
+
+        if(!uNum.isEmpty()){
+            SharedDataStorage1.uNumber = uNum;
+
+        } else {
+            ToastUtil.show(this,"请输入车牌号!");
+
+        }
+
+        if(!uColorStr.isEmpty()){
+            SharedDataStorage1.setuColor(uColorStr);
+
+        } else {
+            ToastUtil.show(this,"请输入车辆颜色！");
+        }
+
+        if(!uMessage.isEmpty()){
+            SharedDataStorage1.uMessage = uMessage;
+
+        } else {
+            ToastUtil.show(this,"请输入申请信息！");
+        }
+
+
+        if(!uNum.isEmpty() && !uColorStr.isEmpty() && !uMessage.isEmpty()){
+            byte[] msg0 = ("M@" + SharedDataStorage1.userName + "," + SharedDataStorage1.uNumber + ","+ SharedDataStorage1.uColor + "," + "\r\n").getBytes();
+
+            mBLESPPUtils.send(msg0);
+        }
+
     }
+
 
     private void findView() {
         et_uNumber1 = findViewById(R.id.et_uNumber1);
@@ -300,7 +338,7 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
      */
     @Override
     public void onReceiveBytes(final byte[] bytes) {
-        postShowToast("收到数据:" + Arrays.toString(bytes), new DoSthAfterPost() {
+        postShowToast("收到数据:" + bytesToHexString(bytes), new DoSthAfterPost() {
             @SuppressLint("SetTextI18n")
             @Override
             public void doIt() {
@@ -330,5 +368,23 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
     @Override
     public void onFinishFoundDevice() {
 
+    }
+
+    /**
+     * 高效写法 byte数组转成16进制字符串
+     *
+     * @param bytes byte数组
+     * @return 16进制字符串
+     */
+    @NonNull
+    @Contract("_ -> new")
+    public static String bytesToHexString(@NonNull byte[] bytes) {
+        char[] buf = new char[bytes.length * 2];
+        int c = 0;
+        for (byte b : bytes) {
+            buf[c++] = digits[(b >> 4) & 0x0F];
+            buf[c++] = digits[b & 0x0F];
+        }
+        return new String(buf);
     }
 }
