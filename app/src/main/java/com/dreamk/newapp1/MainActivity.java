@@ -101,9 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if(userFlag){
                         //管理用户页面
+                        SharedDataStorage1.isAdminUser = true;
                         GotoA();
                     } else {
                         //普通用户页面
+                        SharedDataStorage1.isAdminUser = false;
                         GotoB();
                     }
 
@@ -116,13 +118,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * User页面
+     */
     private void GotoB() {
         Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);
 
     }
 
+    /**
+     * AdminUser页面
+     */
     private void GotoA() {
+//        SharedDataStorage1
         Intent intent = new Intent(this, AdminActivity.class);
         startActivity(intent);
     }
@@ -139,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         btn_login1.setOnClickListener(v -> {
             //从用户的输入获取用户名和密码
             String userName = et_user1.getText().toString();
+
             String password = et_pwd1.getText().toString();
             boolean foundUser = false;
             if (userName.isEmpty()) {
@@ -154,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     if (userName.equals(adminUserNames[i]) && password.equals(adminUserPasswords[i])) {
                         ToastUtil.showTop(this, "管理用户组： " + userName + " 正在登录...");
                         foundUser = true;
+                        SharedDataStorage1.userName = userName;
                         GT_getPermission(true);
                         break;
                     }
@@ -164,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 0; j < userNames.length; j++) {
                         if (userName.equals(userNames[j]) && password.equals(userPasswords[j])) {
                             ToastUtil.showTop(this, "普通用户组： " + userName + "正在登录...");
+                            SharedDataStorage1.userName = userName;
                             GT_getPermission(false);
                             break;
                         } else {

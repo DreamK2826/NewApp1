@@ -22,7 +22,7 @@ import java.util.UUID;
  *      连接蓝牙串口
  *      发送串口数据
  *      接收串口数据
- * @author gtf35 gtf@gtf35.top https://blog.gtf35.top/
+ * @author gtf35 gtf@gtf35.top , https://blog.gtf35.top/
  */
 class BLESPPUtils {
     private static boolean mEnableLogOut = false;

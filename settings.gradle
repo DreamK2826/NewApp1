@@ -1,13 +1,12 @@
 pluginManagement {
     repositories {
         maven {
-            allowInsecureProtocol = true
+            maven { url "https://repo.maven.apache.org/maven2/io/github/" }
             url 'https://mirrors.cloud.tencent.com/gradle/'}
 //                maven {
 //                    allowInsecureProtocol = true
 //                    url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
         maven {
-            allowInsecureProtocol = true
             url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven {
             allowInsecureProtocol = true
@@ -16,10 +15,8 @@ pluginManagement {
             allowInsecureProtocol = true
             url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         maven {
-            allowInsecureProtocol = true
             url 'https://maven.aliyun.com/repository/jcenter' }
         maven {
-            allowInsecureProtocol = true
             url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://jitpack.io' }
         google {
@@ -36,14 +33,13 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url "https://repo.maven.apache.org/maven2/io/github/" }
         maven {
-            allowInsecureProtocol = true
             url 'https://mirrors.cloud.tencent.com/gradle/'}
 //                maven {
 //                    allowInsecureProtocol = true
 //                    url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
         maven {
-            allowInsecureProtocol = true
             url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven {
             allowInsecureProtocol = true
@@ -52,10 +48,8 @@ dependencyResolutionManagement {
             allowInsecureProtocol = true
             url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         maven {
-            allowInsecureProtocol = true
             url 'https://maven.aliyun.com/repository/jcenter' }
         maven {
-            allowInsecureProtocol = true
             url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://jitpack.io' }
         google()

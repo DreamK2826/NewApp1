@@ -8,4 +8,116 @@
     tools:context=".UserActivity">
 
 
+    <TextView
+        android:id="@+id/tv_u1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="标题TEXT"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="用户："
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_uname"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_uname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="17dp"
+        android:text="USERNAME"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/btn_uExit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="40dp"
+        android:text="退出"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="126dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/et_uNumber1"
+
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:hint="在此填写车牌号码：（必填）" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/et_uColor1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:hint="在此填写车辆颜色：（必填）" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/et_uMessage"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:hint="在此填写您的理由：（必填）" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_uCancel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="   取消   " />
+
+                <Space
+                    android:layout_width="60dp"
+                    android:layout_height="10dp" />
+
+                <Button
+                    android:id="@+id/btn_uSubmit1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="申请借道" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
