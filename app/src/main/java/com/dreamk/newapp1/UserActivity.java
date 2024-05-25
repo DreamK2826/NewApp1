@@ -3,6 +3,8 @@ package com.dreamk.newapp1;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -111,8 +113,29 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
 
 
         if(!uNum.isEmpty() && !uColorStr.isEmpty() && !uMessage.isEmpty()){
-            byte[] msg0 = ("M@" + SharedDataStorage1.userName + "," + SharedDataStorage1.uNumber + ","+ SharedDataStorage1.uColor + "," + "\r\n").getBytes();
+            byte[] msg0 = ("M@" + SharedDataStorage1.userName + "," + SharedDataStorage1.uNumber + ","
+                    + SharedDataStorage1.uColor + "," + "\r\n").getBytes();
 
+            //插入SQL
+            String sql = "insert into myTable1(username,uNumber,uColor,uMessage,permitted,value1) values('"
+                    + SharedDataStorage1.userName + "','"
+                    + SharedDataStorage1.uNumber + "','"
+                    + SharedDataStorage1.uColor + "','"
+                    + SharedDataStorage1.uMessage + "','"
+                    + 0 +  "','"
+                    + 0 +"')";
+
+            SQLiteOpenHelper helper = MySqliteOpenHelper.getmInstance(this);
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            if(db.isOpen()){
+
+                //执行SQL语句
+                db.execSQL(sql);
+                helper.close();
+                db.close();
+
+            }
             mBLESPPUtils.send(msg0);
         }
 
