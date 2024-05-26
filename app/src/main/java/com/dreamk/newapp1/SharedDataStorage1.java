@@ -21,20 +21,23 @@ public class SharedDataStorage1 {
             case "蓝色":
                 res = 3;
                 break;
-            case "白色":
+            case "紫色":
                 res = 4;
                 break;
-            case "黑色":
+            case "白色":
                 res = 5;
                 break;
-            case "灰色":
+            case "黑色":
                 res = 6;
                 break;
-            case "粉色":
+            case "灰色":
                 res = 7;
                 break;
-            case "黄色":
+            case "粉色":
                 res = 8;
+                break;
+            case "黄色":
+                res = 9;
                 break;
         }
         uColor = res;
