@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="340sp"
+            android:layout_height="70sp"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/imageView"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_l_name"
+                android:layout_width="wrap_content"
+                android:layout_height="24sp"
+                android:text="user_name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_l_num"
+                android:layout_width="wrap_content"
+                android:layout_height="22sp"
+                android:text="user_number"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:id="@+id/tv_l_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="22sp"
+                android:text="user_msg"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp">
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/imageView"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

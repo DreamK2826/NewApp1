@@ -1,8 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity"/>
+    tools:context=".AdminActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理页面"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="欢迎用户："
+                android:textSize="20sp"/>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_aUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="USERNAMEADMIN"/>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btn_a_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="刷新列表"/>
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="30dp"/>
+
+            <Button
+                android:id="@+id/btn_a_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="退出登录"/>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            app:dividerColor="@color/divider1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv_a_permission"
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
