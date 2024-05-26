@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorAccent">#FFA726</color>
     <color name="divider1">#9CCC65</color>
+    <color name="unameColor">#D81B60</color>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -41,6 +42,7 @@ public class MyListAdapter extends BaseAdapter {
             myViewHolder.tv_l_msg = convertView.findViewById(R.id.tv_l_msg);
             myViewHolder.tv_l_num = convertView.findViewById(R.id.tv_l_num);
             myViewHolder.tv_l_name = convertView.findViewById(R.id.tv_l_name);
+            myViewHolder.img = convertView.findViewById(R.id.imageView);
             convertView.setTag(myViewHolder);
         } else {
             myViewHolder = (MyViewHolder) convertView.getTag();
@@ -53,6 +55,7 @@ public class MyListAdapter extends BaseAdapter {
 
     static class MyViewHolder{
         TextView tv_l_name,tv_l_num,tv_l_msg;
+        ImageView img;
     }
 
 

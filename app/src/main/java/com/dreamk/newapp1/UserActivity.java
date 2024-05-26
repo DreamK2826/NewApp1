@@ -304,10 +304,17 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
     @Override
     public void onFoundDevice(BluetoothDevice device) {
         Log.d("BLE", "发现设备 " + device.getName() + device.getAddress());
+//        if (device.getName().charAt(0) != 'H'){
+//            return;
+//        }
+        if (!device.getAddress().substring(0,2).equals("98")){
+            return;
+        }
         // 判断是不是重复的
         for (int i = 0; i < mDevicesList.size(); i++) {
             if (mDevicesList.get(i).getAddress().equals(device.getAddress())) return;
         }
+
         // 添加，下次有就不显示了
         mDevicesList.add(device);
         // 添加条目到 UI 并设置点击事件
