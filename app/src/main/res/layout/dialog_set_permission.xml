@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/dialog_layout"
+    android:background="@drawable/background2"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_dialog_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dialog_tittle:"
+        android:textSize="24sp"/>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_dialog_uName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USERNAME"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/unameColor"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+        <TextView
+            android:id="@+id/tv_dialog_uNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USERNUMBER"
+            android:textSize="20sp"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+        <TextView
+            android:id="@+id/tv_dialog_uColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USERCOLOR"
+            android:textSize="18sp"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+        <TextView
+            android:id="@+id/tv_dialog_uMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USERMESSAGE"
+            android:textSize="18sp"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_dialog_reject"
+            android:text="驳回"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_dialog_cancel"
+            android:text="取消"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_dialog_OK"
+            android:text="允许"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</LinearLayout>
