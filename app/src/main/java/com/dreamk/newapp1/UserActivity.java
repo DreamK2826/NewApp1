@@ -112,8 +112,9 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
 
 
         if(!uNum.isEmpty() && !uColorStr.isEmpty() && !uMessage.isEmpty()){
-            byte[] msg0 = ("M@" + SharedDataStorage1.userName + "," + SharedDataStorage1.uNumber + ","
-                    + SharedDataStorage1.uColor + "," + "\r\n").getBytes();
+            byte[] msg0;
+//            msg0 = ("M@" + SharedDataStorage1.userName + "," + SharedDataStorage1.uNumber + ","
+//                    + SharedDataStorage1.uColor + "," + "\r\n").getBytes();
 
             //插入SQL
             String sql = "insert into myTable1(username,uNumber,uColor,uMessage,permitted,value1) values('"
@@ -128,13 +129,16 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
             SQLiteDatabase db = helper.getWritableDatabase();
 
             if(db.isOpen()){
-
                 //执行SQL语句
                 db.execSQL(sql);
                 helper.close();
                 db.close();
-
             }
+            msg0 = new byte[3];
+            msg0[0] = (byte) 0xff;
+            msg0[1] = (byte) SharedDataStorage1.uColor;
+            msg0[2] = (byte) 0x7f;
+            //蓝牙发送
             mBLESPPUtils.send(msg0);
         }
 

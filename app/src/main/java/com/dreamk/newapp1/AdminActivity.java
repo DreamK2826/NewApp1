@@ -124,7 +124,7 @@ class DbObject {
      *
      * @param _id  数据库自增数值,主键,integer
      * @param username 用户名,text
-     * @param uNumber 用户号码,text
+     * @param uNumber 用户车牌号,text
      * @param uColor 颜色,integer
      * @param uMessage 用户申请信息,text
      * @param permitted 是否已经许可,integer
