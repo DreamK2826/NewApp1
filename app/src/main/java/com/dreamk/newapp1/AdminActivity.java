@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -72,6 +74,8 @@ public class AdminActivity extends AppCompatActivity {
                 ToastUtil.showTop(this,"发生了错误！");
             }
         });
+
+        lv_a_permission.setOnItemClickListener((parent, view, position, id) -> ToastUtil.show(AdminActivity.this,"ListViewItem:" + position));
     }
 
 

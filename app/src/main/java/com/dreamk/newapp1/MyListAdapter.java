@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ public class MyListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mData.get(position);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class MyListAdapter extends BaseAdapter {
             myViewHolder.tv_l_msg = convertView.findViewById(R.id.tv_l_msg);
             myViewHolder.tv_l_num = convertView.findViewById(R.id.tv_l_num);
             myViewHolder.tv_l_name = convertView.findViewById(R.id.tv_l_name);
-            myViewHolder.img = convertView.findViewById(R.id.imageView);
+            myViewHolder.img = convertView.findViewById(R.id.imageButton);
             convertView.setTag(myViewHolder);
         } else {
             myViewHolder = (MyViewHolder) convertView.getTag();
@@ -50,12 +51,16 @@ public class MyListAdapter extends BaseAdapter {
         myViewHolder.tv_l_name.setText(mData.get(position).getlName());
         myViewHolder.tv_l_num.setText(mData.get(position).getlNumber());
         myViewHolder.tv_l_msg.setText(mData.get(position).getlMsg());
+        myViewHolder.img.setOnClickListener(v -> {
+
+            ToastUtil.show(mContext,"imgOnClick:" + position);
+        });
         return convertView;
     }
 
     static class MyViewHolder{
         TextView tv_l_name,tv_l_num,tv_l_msg;
-        ImageView img;
+        ImageButton img;
     }
 
 

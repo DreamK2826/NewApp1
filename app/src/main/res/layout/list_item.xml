@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="340sp"
+            android:layout_width="300sp"
             android:layout_height="70sp"
             android:layout_marginEnd="0dp"
-            android:layout_toStartOf="@+id/imageView"
+            android:layout_toStartOf="@+id/imageButton"
             android:orientation="vertical">
 
             <TextView
@@ -39,31 +40,30 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="70dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp">
+            android:layout_height="70sp">
+            <ImageButton
+                android:layout_gravity="center"
+                android:id="@+id/imageButton"
+                android:focusable="false"
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:src="@drawable/arrow_f"
+                android:background="@color/imgButtonBG"/>
 
         </LinearLayout>
-
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/imageView"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:forceDarkAllowed="true"
-            android:src="@drawable/arrow_f"/>
-
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
