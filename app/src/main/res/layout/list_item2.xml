@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/imageButton"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_l_name"
+                android:layout_width="wrap_content"
+                android:layout_height="24sp"
+                android:text="user_name"
+                android:textColor="@color/unameColor"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_l_num"
+                android:layout_width="wrap_content"
+                android:layout_height="22sp"
+                android:text="user_number"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:id="@+id/tv_l_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="22sp"
+                android:text="user_msg"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="70dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

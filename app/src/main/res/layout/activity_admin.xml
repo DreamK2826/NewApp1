@@ -56,10 +56,19 @@
                 android:id="@+id/btn_a_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="刷新列表"/>
+                android:text="刷新待处理列表"/>
 
             <Space
-                android:layout_width="50dp"
+                android:layout_width="10dp"
+                android:layout_height="30dp"/>
+
+            <Button
+                android:id="@+id/btn_a_refAll"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="查看全部"/>
+            <Space
+                android:layout_width="10dp"
                 android:layout_height="30dp"/>
 
             <Button

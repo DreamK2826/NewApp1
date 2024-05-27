@@ -5,27 +5,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AdminActivity extends AppCompatActivity {
 
+    public static ClipBoardService clipBoard;
 
     private TextView tv_aUserName;
-    private Button btn_a_refresh, btn_a_exit;
+    public Button btn_a_refresh, btn_a_exit,btn_a_refAll;
     private ListView lv_a_permission;
 
 
@@ -51,6 +48,7 @@ public class AdminActivity extends AppCompatActivity {
         findView();
         tv_aUserName.setText(SharedDataStorage1.userName);
         setListener();
+        clipBoard = new ClipBoardService(this,AdminActivity.this);
 
     }
 
@@ -58,20 +56,28 @@ public class AdminActivity extends AppCompatActivity {
         lv_a_permission = findViewById(R.id.lv_a_permission);
         tv_aUserName = findViewById(R.id.tv_aUserName);
         btn_a_refresh = findViewById(R.id.btn_a_refresh);
+        btn_a_refAll = findViewById(R.id.btn_a_refAll);
         btn_a_exit = findViewById(R.id.btn_a_exit);
 
 
     }
 
     private void setListener() {
+        btn_a_refAll.setOnClickListener(v -> {
+            try {
+                readDatabase("select * from myTable1");
+                setListView(2);
+            } catch (Exception ignored) {
+//                ToastUtil.showTop(this,"发生了错误！");
+            }
+        });
         btn_a_exit.setOnClickListener(view -> finish());
         btn_a_refresh.setOnClickListener(view -> {
-
             try {
-                readDatabase();
-                setListView();
+                readDatabase("select * from myTable1 where permitted = 0");
+                setListView(1);
             } catch (Exception ignored) {
-                ToastUtil.showTop(this,"发生了错误！");
+//                ToastUtil.showTop(this,"发生了错误！");
             }
         });
 
@@ -79,15 +85,16 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-    private void readDatabase() {
+    public void readDatabase(String sql) {
         SQLiteOpenHelper helper = MySqliteOpenHelper.getmInstance(this);
         SQLiteDatabase db = helper.getReadableDatabase();
         mRequests = new ArrayList<>();
 
         if (db.isOpen()) {
+            boolean haveDatas = false;
             int _id, uColor2, permitted2, value1;
             String username2, uNumber2, uMessage2;
-            Cursor cursor = db.rawQuery("select * from myTable1 where permitted = 0", null);
+            Cursor cursor = db.rawQuery(sql, null);
             //从数据库 -> myTable1 中获取所有未通过请求
             while (cursor.moveToNext()) {
                 _id = cursor.getInt(0);
@@ -98,13 +105,18 @@ public class AdminActivity extends AppCompatActivity {
                 permitted2 = cursor.getInt(5);
                 value1 = cursor.getInt(6);
                 mRequests.add(new DbObject(_id, username2, uNumber2, uColor2, uMessage2, permitted2, value1));
+                haveDatas = true;
             }
 //            tv_aUserName.setText(String.valueOf(mRequests.size()));
             cursor.close();
             db.close();
+            if(!haveDatas){
+                ToastUtil.show(this,"没有待处理申请！");
+            }
         }
+
     }
-    void setListView() {
+    public void setListView(int mode) {
         mContext = AdminActivity.this;
         mData = new LinkedList<>();
         String userName, userNumber, userMsg;
@@ -115,89 +127,9 @@ public class AdminActivity extends AppCompatActivity {
             userMsg = mRequests.get(i).getuMessage();
             mData.add(new ListViewData(userName,userNumber,userMsg));
         }
-        myListAdapter = new MyListAdapter((LinkedList<ListViewData>) mData, mContext);
+        myListAdapter = new MyListAdapter((LinkedList<ListViewData>) mData, mContext,mode);
+        MyListAdapter.setMyDbObject(mRequests);
         lv_a_permission.setAdapter(myListAdapter);
     }
 }
 
-class DbObject {
-    int _id, uColor, permitted, value1;
-    String username, uNumber, uMessage;
-
-    /**
-     *
-     * @param _id  数据库自增数值,主键,integer
-     * @param username 用户名,text
-     * @param uNumber 用户车牌号,text
-     * @param uColor 颜色,integer
-     * @param uMessage 用户申请信息,text
-     * @param permitted 是否已经许可,integer
-     * @param value1 预留数据,integer
-     */
-    public DbObject(int _id, String username, String uNumber, int uColor,
-                    String uMessage, int permitted, int value1) {
-        this._id = _id;
-        this.uColor = uColor;
-        this.permitted = permitted;
-        this.value1 = value1;
-        this.username = username;
-        this.uNumber = uNumber;
-        this.uMessage = uMessage;
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
-    }
-
-    public int getuColor() {
-        return uColor;
-    }
-
-    public void setuColor(int uColor) {
-        this.uColor = uColor;
-    }
-
-    public int getPermitted() {
-        return permitted;
-    }
-
-    public void setPermitted(int permitted) {
-        this.permitted = permitted;
-    }
-
-    public int getValue1() {
-        return value1;
-    }
-
-    public void setValue1(int value1) {
-        this.value1 = value1;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getuNumber() {
-        return uNumber;
-    }
-
-    public void setuNumber(String uNumber) {
-        this.uNumber = uNumber;
-    }
-
-    public String getuMessage() {
-        return uMessage;
-    }
-
-    public void setuMessage(String uMessage) {
-        this.uMessage = uMessage;
-    }
-}
