@@ -81,7 +81,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        lv_a_permission.setOnItemClickListener((parent, view, position, id) -> ToastUtil.show(AdminActivity.this,"ListViewItem:" + position));
+//        lv_a_permission.setOnItemClickListener((parent, view, position, id) -> ToastUtil.show(AdminActivity.this,"ListViewItem:" + position));
     }
 
 
@@ -119,13 +119,26 @@ public class AdminActivity extends AppCompatActivity {
     public void setListView(int mode) {
         mContext = AdminActivity.this;
         mData = new LinkedList<>();
-        String userName, userNumber, userMsg;
+        String userName, userNumber, userMsg,permitted = "null";
+
         //从DbObject List里面获取每一个申请的需要显示在ListView的信息
         for(int i = 0; i < mRequests.size(); i++){
             userName = mRequests.get(i).getUsername();
             userNumber = mRequests.get(i).getuNumber();
             userMsg = mRequests.get(i).getuMessage();
-            mData.add(new ListViewData(userName,userNumber,userMsg));
+
+            int p = mRequests.get(i).getPermitted();
+            switch (p){
+                case 2:
+                    permitted = "已拒绝";
+                    break;
+                case 1:
+                    permitted = "已通过";
+                    break;
+                case 0:
+                    permitted = "未审核";
+            }
+            mData.add(new ListViewData(userName,userNumber,userMsg,permitted));
         }
         myListAdapter = new MyListAdapter((LinkedList<ListViewData>) mData, mContext,mode);
         MyListAdapter.setMyDbObject(mRequests);

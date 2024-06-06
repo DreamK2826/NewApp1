@@ -10,8 +10,8 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70sp"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/imageButton"
             android:orientation="vertical">
@@ -19,7 +19,7 @@
             <TextView
                 android:id="@+id/tv_l_name"
                 android:layout_width="wrap_content"
-                android:layout_height="24sp"
+                android:layout_height="24dp"
                 android:text="user_name"
                 android:textColor="@color/unameColor"
                 android:textSize="20sp"
@@ -45,9 +45,28 @@
             android:layout_width="10dp"
             android:layout_height="70dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="70dp">
+
+            
+        </TextView>
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="70sp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/tv_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未通过"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

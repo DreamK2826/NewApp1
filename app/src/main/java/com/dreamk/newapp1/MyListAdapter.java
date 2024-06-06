@@ -58,9 +58,10 @@ public class MyListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder myViewHolder = null;
+        MyViewHolder myViewHolder;
         if(convertView == null){
             if(mode == 1){
+                //mode 1 带按键的
                 convertView = LayoutInflater.from(mContext)
                         .inflate(R.layout.list_item,parent,false);
             } else if (mode == 2){
@@ -72,9 +73,12 @@ public class MyListAdapter extends BaseAdapter {
             myViewHolder.tv_l_msg = convertView.findViewById(R.id.tv_l_msg);
             myViewHolder.tv_l_num = convertView.findViewById(R.id.tv_l_num);
             myViewHolder.tv_l_name = convertView.findViewById(R.id.tv_l_name);
+
             if(mode == 1){
                 myViewHolder.img = convertView.findViewById(R.id.imageButton);
 
+            } else if(mode == 2){
+                myViewHolder.tv_pass = convertView.findViewById(R.id.tv_pass);
             }
             convertView.setTag(myViewHolder);
         } else {
@@ -83,6 +87,8 @@ public class MyListAdapter extends BaseAdapter {
         myViewHolder.tv_l_name.setText(mData.get(position).getlName());
         myViewHolder.tv_l_num.setText(mData.get(position).getlNumber());
         myViewHolder.tv_l_msg.setText(mData.get(position).getlMsg());
+        myViewHolder.tv_pass.setText(mData.get(position).getPermitted());
+
         if(mode == 1){
             myViewHolder.img.setOnClickListener(v -> {
                 permitTest(position);
@@ -166,7 +172,7 @@ public class MyListAdapter extends BaseAdapter {
     }
 
     static class MyViewHolder{
-        TextView tv_l_name,tv_l_num,tv_l_msg;
+        TextView tv_l_name,tv_l_num,tv_l_msg,tv_pass;
         ImageButton img;
     }
 
