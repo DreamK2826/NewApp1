@@ -79,6 +79,8 @@ public class MyListAdapter extends BaseAdapter {
 
             } else if(mode == 2){
                 myViewHolder.tv_pass = convertView.findViewById(R.id.tv_pass);
+                myViewHolder.tv_pass.setText(mData.get(position).getPermitted());
+
             }
             convertView.setTag(myViewHolder);
         } else {
@@ -87,7 +89,7 @@ public class MyListAdapter extends BaseAdapter {
         myViewHolder.tv_l_name.setText(mData.get(position).getlName());
         myViewHolder.tv_l_num.setText(mData.get(position).getlNumber());
         myViewHolder.tv_l_msg.setText(mData.get(position).getlMsg());
-        myViewHolder.tv_pass.setText(mData.get(position).getPermitted());
+
 
         if(mode == 1){
             myViewHolder.img.setOnClickListener(v -> {
