@@ -312,9 +312,9 @@ public class UserActivity extends AppCompatActivity implements BLESPPUtils.OnBlu
             if(device.getName() == null){
                 return;
             }
-            if (device.getName().charAt(0) != 'H'){
-                return;
-            }
+//            if (device.getName().charAt(0) != 'H'){
+//                return;
+//            }
         } catch (Exception ignored){
             ToastUtil.show(this,"扫描设备发生错误!");
         }
